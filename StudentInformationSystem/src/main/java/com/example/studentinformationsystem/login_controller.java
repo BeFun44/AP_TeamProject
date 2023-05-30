@@ -39,7 +39,7 @@ public class login_controller {
     @FXML
     void handleLogin(ActionEvent event) {
         if (cmbLoginType.getValue().toString() == "Admin") {
-            String sql = "SELECT * FROM admin WHERE username = ? and passwords = ?";
+            String sql = "SELECT * FROM admin WHERE first_name = ? and admin_id = ?";
             connect = Database.connectDb();
             try {
                 Alert alert;

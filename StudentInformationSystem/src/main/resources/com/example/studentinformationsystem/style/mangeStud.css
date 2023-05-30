@@ -1,0 +1,12 @@
+.vbox{
+-fx-background-color : #1f80e0;
+-fx-background-radius : 20;
+}
+.button{
+-fx-background-color :  #84aff8;
+-fx-background-radius : 20;
+}
+.grid{
+  -fx-background-color : #b4caf1;
+  -fx-background-radius : 30;
+}

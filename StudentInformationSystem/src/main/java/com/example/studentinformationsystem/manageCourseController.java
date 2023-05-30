@@ -31,6 +31,8 @@ public class manageCourseController {
     private Button btnSearch;
     @FXML
     private Button btnUpdate;
+    @FXML
+    private TextField txfDId;
 
     @FXML
     private Button btnView;
@@ -54,11 +56,12 @@ public class manageCourseController {
     void handelAddCourse(ActionEvent event) {
         try{
             connect = Database.connectDb();
-            prepare = connect.prepareStatement("insert into course values(?,?,?,?)");
+            prepare = connect.prepareStatement("insert into course values(?,?,?,?,?)");
             prepare.setInt(1,Integer.parseInt(txfCId.getText()));
             prepare.setString(2,txfCN.getText());
             prepare.setString(3,txfCC.getText());
-            prepare.setInt(4,Integer.parseInt(txfCH.getText()));
+            prepare.setString(4,txfDId.getText());
+            prepare.setInt(5,Integer.parseInt(txfCH.getText()));
             prepare.executeUpdate();
             connect.close();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -91,11 +94,12 @@ public class manageCourseController {
     void handleUbdateCourse(ActionEvent event) {
         try{
             connect = Database.connectDb();
-            prepare= connect.prepareStatement("update course set  course_id=?,course_name=?,course_code=?,credit_hours=? where course_id='"+txfSearch.getText()+"'" );
+            prepare= connect.prepareStatement("update course set  course_id=?,course_name=?,course_code=?,department_id=?, credit_hours=? where course_id='"+txfSearch.getText()+"'" );
             prepare.setInt(1,Integer.parseInt(txfCId.getText()));
             prepare.setString(2,txfCN.getText());
             prepare.setString(3,txfCC.getText());
-            prepare.setInt(4,Integer.parseInt(txfCH.getText()));
+            prepare.setString(4,txfDId.getText());
+            prepare.setInt(5,Integer.parseInt(txfCH.getText()));
             prepare.executeUpdate();
             connect.close();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -118,7 +122,8 @@ public class manageCourseController {
                 txfCId.setText(result.getString(1));
                 txfCN.setText(result.getString(2));
                 txfCC.setText(result.getString(3));
-                txfCH.setText(result.getString(4));
+                txfDId.setText(result.getString(4));
+                txfCH.setText(result.getString(5));
 
             }
             connect.close();

@@ -3,8 +3,17 @@ package com.example.studentinformationsystem;
 public class Course {
 private int courseID;
 private String courseName;
-private String courseCode;
-private int CreditHours;
+private String DepartmentId;
+
+
+
+    public void setDepartmentId(String departmentId) {
+        DepartmentId = departmentId;
+    }
+
+
+    private String courseCode;
+    private int CreditHours;
 
     public void setCourseID(int courseID) {
         this.courseID = courseID;
@@ -33,15 +42,21 @@ private int CreditHours;
     public String getCourseCode() {
         return courseCode;
     }
+    public String getDepartmentId() {
+        return DepartmentId;
+    }
 
     public int getCreditHours() {
         return CreditHours;
     }
 
-    public Course(int courseID, String courseName, String courseCode, int creditHours) {
+    public Course(int courseID, String courseName, String courseCode, int creditHours,String departmentId) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.courseCode = courseCode;
         CreditHours = creditHours;
+        DepartmentId = departmentId;
+
+
     }
 }

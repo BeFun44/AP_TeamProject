@@ -12,14 +12,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #879190;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studentinformationsystem.view_course_controller">
+<AnchorPane prefHeight="405.0" prefWidth="656.0" style="-fx-background-color: #879190;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studentinformationsystem.view_course_controller">
    <children>
-      <TableView fx:id="tableView" layoutX="232.0" layoutY="53.0" prefHeight="283.0" prefWidth="360.0" style="-fx-background-color: #737a7a;">
+      <TableView fx:id="tableView" layoutX="232.0" layoutY="53.0" prefHeight="283.0" prefWidth="413.0" style="-fx-background-color: #737a7a;">
         <columns>
-          <TableColumn fx:id="colID" prefWidth="87.99996948242188" text="courseID" />
-          <TableColumn fx:id="colCN" prefWidth="76.0" text="courseName" />
-            <TableColumn fx:id="colCC" prefWidth="94.0" text="courseCode" />
-            <TableColumn fx:id="colCrHr" prefWidth="86.66668701171875" text="CreditHours" />
+          <TableColumn fx:id="colID" prefWidth="66.0" text="courseID" />
+          <TableColumn fx:id="colCN" prefWidth="78.6666259765625" text="courseName" />
+            <TableColumn fx:id="colCC" prefWidth="76.0" text="courseCode" />
+            <TableColumn fx:id="colCrHr" prefWidth="95.33331298828125" text="CreditHours" />
+            <TableColumn fx:id="colDepId" prefWidth="106.66668701171875" text="DepartmentID" />
         </columns>
       </TableView>
       <VBox layoutX="21.0" layoutY="54.0" prefHeight="283.0" prefWidth="197.0" style="-fx-background-color: #737a7a;">
@@ -32,7 +33,7 @@
                   <Image url="@image/course.png" />
                </image>
             </ImageView>
-            <TextArea prefHeight="168.0" prefWidth="197.0" style="-fx-background-color: #b6cccc;" text="&#10; 💚View Course info💚&#10; 💚 serach by CourseId💚&#10;">
+            <TextArea prefHeight="168.0" prefWidth="175.0" style="-fx-background-color: #b6cccc;" text="&#10; 💚View Course info💚&#10; 💚 serach by CourseId💚&#10;">
                <font>
                   <Font name="Times New Roman" size="12.0" />
                </font>

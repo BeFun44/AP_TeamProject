@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Menu;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -14,8 +16,19 @@ public class HelloController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    @FXML
+    private Menu about;
 
 
+    @FXML
+    void handleAbout(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("AboutNotepad");
+        alert.setHeaderText("MyNotepad");
+        alert.setContentText("My Name is is Ephrem Habtamu I made this notepad app by using javafx. You Can "+
+                "Contact Me with email address:\n ephraim0524@gmail.com");
+        alert.showAndWait();
+    }
     @FXML
     void handleLogin(ActionEvent event) {
 

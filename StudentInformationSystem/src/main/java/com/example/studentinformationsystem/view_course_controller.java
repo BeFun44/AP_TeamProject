@@ -39,6 +39,8 @@ public class view_course_controller {
 
     @FXML
     private TableColumn<Course, Integer> colCrHr;
+    @FXML
+    private TableColumn<Course, String> colDepId;
 
     @FXML
     private TableColumn<Course, Integer> colID;
@@ -63,7 +65,9 @@ public class view_course_controller {
         colID.setCellValueFactory(new PropertyValueFactory<>("courseID"));
         colCN.setCellValueFactory(new PropertyValueFactory<>("courseName"));
         colCC.setCellValueFactory(new PropertyValueFactory<>("courseCode"));
+        colDepId.setCellValueFactory(new PropertyValueFactory<>("DepartmentId"));
         colCrHr.setCellValueFactory(new PropertyValueFactory<>("CreditHours"));
+        colDepId.setCellValueFactory(new PropertyValueFactory<>("DepartmentId"));
         tableView.setItems(courseList);
 
     }
@@ -79,7 +83,8 @@ public class view_course_controller {
                         result.getInt(1),
                         result.getString(2),
                         result.getString(3),
-                        result.getInt(4)));
+                        result.getInt(4),
+                        result.getString(5)));
             }
 //                        tableView.setItems(studentList)
             loadTableViews();

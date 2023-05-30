@@ -24,15 +24,18 @@
          <viewport>
             <Rectangle2D />
          </viewport>
+         <BorderPane.margin>
+            <Insets bottom="1.0" left="2.0" right="1.0" top="2.0" />
+         </BorderPane.margin>
       </ImageView>
    </center>
    <top>
       <MenuBar prefHeight="45.0" prefWidth="637.0" style="-fx-background-color: #dbcced;" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="Home" />
-          <Menu mnemonicParsing="false" text="About">
+          <Menu fx:id="about" mnemonicParsing="false" onAction="#handleAbout" text="About">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" text="About Us" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help" />
@@ -69,7 +72,7 @@
                   <Image url="@image/stud_logo.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnLogin" mnemonicParsing="false" onAction="#handleLogin" prefHeight="47.0" prefWidth="183.0" style="-fx-background-color: #655b75;" text="Login">
+            <Button fx:id="btnLogin" defaultButton="true" mnemonicParsing="false" onAction="#handleLogin" prefHeight="47.0" prefWidth="183.0" style="-fx-background-color: #655b75;" text="Login" textAlignment="CENTER">
                <VBox.margin>
                   <Insets top="50.0" />
                </VBox.margin>
@@ -81,6 +84,6 @@
       </VBox>
    </left>
    <bottom>
-      <HBox prefHeight="52.0" prefWidth="637.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER" />
+      <HBox prefHeight="52.0" prefWidth="637.0" style="-fx-background-color: #8c8888;" BorderPane.alignment="CENTER" />
    </bottom>
 </BorderPane>
