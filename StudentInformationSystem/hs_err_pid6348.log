@@ -27,7 +27,7 @@
 
 ---------------  S U M M A R Y ------------
 
-Command Line: -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.3.3\lib\idea_rt.jar=54080:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.3.3\bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 --module-path=C:\Users\HP\.m2\repository\org\openjfx\javafx-controls\19\javafx-controls-19-win.jar;C:\Users\HP\.m2\repository\org\openjfx\javafx-base\19\javafx-base-19-win.jar;C:\Users\HP\StudentInformationSystem\target\classes;C:\Users\HP\.m2\repository\org\openjfx\javafx-fxml\19\javafx-fxml-19-win.jar;C:\Users\HP\.m2\repository\org\openjfx\javafx-graphics\19\javafx-graphics-19-win.jar -Djdk.module.main=com.example.studentinformationsystem com.example.studentinformationsystem/com.example.studentinformationsystem.HelloApplication
+Command Line: -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.3.3\lib\idea_rt.jar=54080:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.3.3\bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 --module-path=C:\Users\HP\.m2\repository\org\openjfx\javafx-controls\19\javafx-controls-19-win.jar;C:\Users\HP\.m2\repository\org\openjfx\javafx-base\19\javafx-base-19-win.jar;C:\Users\HP\StudentInformationSystem\target\classes;C:\Users\HP\.m2\repository\org\openjfx\javafx-fxml\19\javafx-fxml-19-win.jar;C:\Users\HP\.m2\repository\org\openjfx\javafx-graphics\19\javafx-graphics-19-win.jar -Djdk.module.main=com.example.studentinformationsystem com.example.studentinformationsystem/com.example.studentinformationsystem.Home
 
 Host: Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz, 4 cores, 7G,  Windows 10 , 64 bit Build 19041 (10.0.19041.2913)
 Time: Tue May 16 00:32:16 2023 E. Africa Standard Time elapsed time: 0.237337 seconds (0d 0h 0m 0s)
@@ -465,7 +465,7 @@ symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Pr
 
 VM Arguments:
 jvm_args: -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.3.3\lib\idea_rt.jar=54080:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.3.3\bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 --module-path=C:\Users\HP\.m2\repository\org\openjfx\javafx-controls\19\javafx-controls-19-win.jar;C:\Users\HP\.m2\repository\org\openjfx\javafx-base\19\javafx-base-19-win.jar;C:\Users\HP\StudentInformationSystem\target\classes;C:\Users\HP\.m2\repository\org\openjfx\javafx-fxml\19\javafx-fxml-19-win.jar;C:\Users\HP\.m2\repository\org\openjfx\javafx-graphics\19\javafx-graphics-19-win.jar -Djdk.module.main=com.example.studentinformationsystem 
-java_command: com.example.studentinformationsystem/com.example.studentinformationsystem.HelloApplication
+java_command: com.example.studentinformationsystem/com.example.studentinformationsystem.Home
 java_class_path (initial): C:\Users\HP\.m2\repository\org\openjfx\javafx-controls\19\javafx-controls-19.jar;C:\Users\HP\.m2\repository\org\openjfx\javafx-graphics\19\javafx-graphics-19.jar;C:\Users\HP\.m2\repository\org\openjfx\javafx-base\19\javafx-base-19.jar;C:\Users\HP\.m2\repository\org\openjfx\javafx-fxml\19\javafx-fxml-19.jar;C:\Users\HP\Downloads\mysql-connector-j-8.0.33\mysql-connector-j-8.0.33.jar
 Launcher Type: SUN_STANDARD
 

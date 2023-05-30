@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 import java.sql.*;
 
-public class login_controller {
+public class LoginController {
     private Stage stage;
     private Parent root;
     private Scene scene;
@@ -39,7 +39,7 @@ public class login_controller {
     @FXML
     void handleLogin(ActionEvent event) {
         if (cmbLoginType.getValue().toString() == "Admin") {
-            String sql = "SELECT * FROM admin WHERE username = ? and passwords = ?";
+            String sql = "SELECT * FROM admin WHERE first_name = ? and admin_id = ?";
             connect = Database.connectDb();
             try {
                 Alert alert;
@@ -101,6 +101,47 @@ public class login_controller {
                 } else {
                     if (result.next()) {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("student_page.fxml"));
+                        root = loader.load();
+                        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+
+                    } else {
+                        alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Wrong Username/Password");
+                        alert.showAndWait();
+                    }
+                }
+                connect.close();
+            }catch(Exception ex){
+                ex.printStackTrace();
+
+            }
+
+        }else if (cmbLoginType.getValue().toString() == "Teacher") {
+            String sql = "SELECT * FROM teacher WHERE first_name = ? and teacher_id = ?";
+            connect = Database.connectDb();
+            try {
+                Alert alert;
+
+                prepare = connect.prepareStatement(sql);
+                prepare.setString(1, username.getText());
+                prepare.setString(2, password.getText());
+
+                result = prepare.executeQuery();
+//            CHECK IF FIELDS ARE EMPTY
+                if (username.getText().isEmpty() || password.getText().isEmpty()) {
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Please fill all blank fields");
+                    alert.showAndWait();
+                } else {
+                    if (result.next()) {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("teacher_page.fxml"));
                         root = loader.load();
                         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                         scene = new Scene(root);

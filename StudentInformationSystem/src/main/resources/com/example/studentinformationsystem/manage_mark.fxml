@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="410.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studentinformationsystem.manage_mark_controller">
+   <children>
+      <TableView fx:id="tableView" layoutX="7.0" layoutY="83.0" prefHeight="200.0" prefWidth="680.0">
+        <columns>
+          <TableColumn fx:id="colStudentID" prefWidth="85.0" text="student_id" />
+            <TableColumn fx:id="colFirstName" prefWidth="113.0" text="first_name" />
+            <TableColumn fx:id="colLastName" prefWidth="98.0" text="last_name" />
+            <TableColumn fx:id="colCourseID" prefWidth="91.0" text="course_id" />
+            <TableColumn fx:id="colCourseName" prefWidth="99.0" text="course_name" />
+            <TableColumn fx:id="colMarkID" prefWidth="79.0" text="mark_id" />
+            <TableColumn fx:id="colMark" prefWidth="79.0" text="mark" />
+        </columns>
+      </TableView>
+      <Button layoutX="582.0" layoutY="36.0" mnemonicParsing="false" onAction="#updateMark" prefHeight="26.0" prefWidth="91.0" style="-fx-background-color: #17bdc3; -fx-border-radius: 30;" text="UpdateMark" textFill="#320808">
+         <font>
+            <Font name="Times New Roman Bold" size="13.0" />
+         </font></Button>
+      <Button layoutX="475.0" layoutY="37.0" mnemonicParsing="false" onAction="#deleteMark" prefHeight="26.0" prefWidth="85.0" style="-fx-background-color: red;" text="DeleteMark">
+         <font>
+            <Font name="Times New Roman Bold" size="13.0" />
+         </font></Button>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: orange;" text="Back">
+         <font>
+            <Font name="Times New Roman Bold" size="15.0" />
+         </font></Button>
+      <Button layoutX="357.0" layoutY="37.0" mnemonicParsing="false" onAction="#handleEnterMark" style="-fx-background-color: green;" text="EnterMark" textFill="#fcfffa">
+         <font>
+            <Font name="Times New Roman Bold" size="14.0" />
+         </font></Button>
+   </children>
+</AnchorPane>

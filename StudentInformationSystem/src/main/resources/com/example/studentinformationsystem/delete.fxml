@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="172.0" prefWidth="298.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studentinformationsystem.DeleteMarkController">
+   <children>
+      <Label alignment="CENTER" layoutX="8.0" layoutY="46.0" text="Please enter MarkID to delete mark" textFill="#0a14e4">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="77.0" text="MarkID :" textFill="#4e49da">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font>
+      </Label>
+      <Button layoutX="199.0" layoutY="107.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="25.0" prefWidth="55.0" style="-fx-background-color: lightgreen;" text="Ok">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txtMark" layoutX="89.0" layoutY="74.0" prefHeight="20.0" prefWidth="74.0" />
+      <Button layoutX="8.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: orange;" text="Back">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

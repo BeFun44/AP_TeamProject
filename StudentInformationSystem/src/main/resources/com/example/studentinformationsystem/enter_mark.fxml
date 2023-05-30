@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="240.0" prefWidth="389.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.studentinformationsystem.EnterMarkController">
+   <children>
+      <Label layoutX="14.0" layoutY="55.0" text="StudentID" textFill="#080cff">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtStudentID" layoutX="136.0" layoutY="52.0" />
+      <TextField fx:id="txtCourseID" layoutX="136.0" layoutY="86.0" />
+      <TextField fx:id="txtMark" layoutX="136.0" layoutY="125.0" />
+      <Button layoutX="174.0" layoutY="168.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: #17b212;" text="OK" textFill="#f8fff8" />
+      <Label layoutX="16.0" layoutY="88.0" text="CourseID" textFill="#080cff">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="127.0" text="Mark Obtained" textFill="#080cff">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="16.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: orange;" text="Back" />
+   </children>
+</AnchorPane>
