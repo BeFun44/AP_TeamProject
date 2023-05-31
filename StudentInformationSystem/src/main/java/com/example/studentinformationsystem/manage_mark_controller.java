@@ -30,38 +30,38 @@ public class manage_mark_controller {
     Scene scene;
 
     @FXML
-    private TableColumn<Mark, Integer> colCourseID;
+    private TableColumn<StudentInfo, Integer> colCourseID;
 
     @FXML
-    private TableColumn<Mark, String> colCourseName;
+    private TableColumn<StudentInfo, String> colCourseName;
 
     @FXML
-    private TableColumn<Mark, String> colFirstName;
+    private TableColumn<StudentInfo, String> colFirstName;
 
     @FXML
-    private TableColumn<Mark, String> colLastName;
+    private TableColumn<StudentInfo, String> colLastName;
     @FXML
-    private TableColumn<Mark, String> colMarkID;
+    private TableColumn<StudentInfo, String> colMarkID;
     @FXML
-    private TableColumn<Mark, Double> colMark;
+    private TableColumn<StudentInfo, Double> colMark;
 
     @FXML
-    private TableColumn<Mark, String> colStudentID;
+    private TableColumn<StudentInfo, String> colStudentID;
 
     @FXML
-    private TableView<Mark> tableView;
-    ObservableList<Mark> markList = FXCollections.observableArrayList();
+    private TableView<StudentInfo> tableView;
+    ObservableList<StudentInfo> studentInfoList = FXCollections.observableArrayList();
 
 //    @FXML
 //    void updateMark(ActionEvent event) {
 //        // Get the selected mark from the TableView
-//        Mark selectedMark = tableView.getSelectionModel().getSelectedItem();
+//        StudentInfo selectedMark = tableView.getSelectionModel().getSelectedItem();
 //        if (selectedMark != null) {
 //            // Show a dialog or input field to enter the new mark value
 //            TextInputDialog dialog = new TextInputDialog(Double.toString(selectedMark.getMark()));
-//            dialog.setTitle("Enter Mark");
+//            dialog.setTitle("Enter StudentInfo");
 //            dialog.setHeaderText("Enter the new mark for " + selectedMark.getFirst_name() + " " + selectedMark.getLast_name());
-//            dialog.setContentText("Mark:");
+//            dialog.setContentText("StudentInfo:");
 //
 //            Optional<String> result = dialog.showAndWait();
 //            result.ifPresent(markValue -> {
@@ -77,7 +77,7 @@ public class manage_mark_controller {
 //                } catch (NumberFormatException e) {
 //                    // Handle invalid mark value
 //                    Alert alert = new Alert(Alert.AlertType.ERROR);
-//                    alert.setTitle("Invalid Mark");
+//                    alert.setTitle("Invalid StudentInfo");
 //                    alert.setHeaderText("Invalid mark value");
 //                    alert.setContentText("Please enter a valid numeric mark value.");
 //                    alert.showAndWait();
@@ -86,7 +86,7 @@ public class manage_mark_controller {
 //        } else {
 //            // No mark selected, show an error message
 //            Alert alert = new Alert(Alert.AlertType.WARNING);
-//            alert.setTitle("No Mark Selected");
+//            alert.setTitle("No StudentInfo Selected");
 //            alert.setHeaderText("No mark selected");
 //            alert.setContentText("Please select a mark from the table.");
 //            alert.showAndWait();
@@ -95,13 +95,13 @@ public class manage_mark_controller {
     @FXML
     void updateMark(ActionEvent event) {
         // Get the selected mark from the TableView
-        Mark selectedMark = tableView.getSelectionModel().getSelectedItem();
-        if (selectedMark != null) {
+        StudentInfo selectedStudentInfo = tableView.getSelectionModel().getSelectedItem();
+        if (selectedStudentInfo != null) {
             // Show a TextInputDialog to enter the new mark value
-            TextInputDialog dialog = new TextInputDialog(Double.toString(selectedMark.getMark()));
-            dialog.setTitle("Enter Mark");
-            dialog.setHeaderText("Enter the new mark for " + selectedMark.getFirst_name() + " " + selectedMark.getLast_name());
-            dialog.setContentText("Mark:");
+            TextInputDialog dialog = new TextInputDialog(Double.toString(selectedStudentInfo.getMark()));
+            dialog.setTitle("Enter StudentInfo");
+            dialog.setHeaderText("Enter the new mark for " + selectedStudentInfo.getFirst_name() + " " + selectedStudentInfo.getLast_name());
+            dialog.setContentText("StudentInfo:");
 
             Optional<String> result = dialog.showAndWait();
             result.ifPresent(markValue -> {
@@ -109,7 +109,7 @@ public class manage_mark_controller {
                 try {
                     double mark = Double.parseDouble(markValue);
                     // Update the mark value for the selected mark
-                    selectedMark.setMark(mark);
+                    selectedStudentInfo.setMark(mark);
 
                     // Perform the database update
                     try {
@@ -118,16 +118,16 @@ public class manage_mark_controller {
                         String query = "UPDATE mark SET mark_obtained = ? WHERE mark_id = ?";
                         preparedStatement = connection.prepareStatement(query);
                         preparedStatement.setDouble(1, mark);
-                        preparedStatement.setInt(2, selectedMark.getMark_id());
+                        preparedStatement.setInt(2, selectedStudentInfo.getMark_id());
                         preparedStatement.executeUpdate();
 
                         connection.close();
 
                         // Show a success message
                         Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-                        successAlert.setTitle("Mark Updated");
-                        successAlert.setHeaderText("Mark successfully updated");
-                        successAlert.setContentText("The mark for " + selectedMark.getFirst_name() + " " + selectedMark.getLast_name() + " has been updated.");
+                        successAlert.setTitle("StudentInfo Updated");
+                        successAlert.setHeaderText("StudentInfo successfully updated");
+                        successAlert.setContentText("The mark for " + selectedStudentInfo.getFirst_name() + " " + selectedStudentInfo.getLast_name() + " has been updated.");
                         successAlert.showAndWait();
 
                         // Refresh the TableView to reflect the updated mark value
@@ -144,7 +144,7 @@ public class manage_mark_controller {
                 } catch (NumberFormatException e) {
                     // Handle invalid mark value
                     Alert invalidAlert = new Alert(Alert.AlertType.WARNING);
-                    invalidAlert.setTitle("Invalid Mark");
+                    invalidAlert.setTitle("Invalid StudentInfo");
                     invalidAlert.setHeaderText("Invalid mark value");
                     invalidAlert.setContentText("Please enter a valid numeric mark value.");
                     invalidAlert.showAndWait();
@@ -153,7 +153,7 @@ public class manage_mark_controller {
         } else {
             // No mark selected, show an error message
             Alert selectionAlert = new Alert(Alert.AlertType.WARNING);
-            selectionAlert.setTitle("No Mark Selected");
+            selectionAlert.setTitle("No StudentInfo Selected");
             selectionAlert.setHeaderText("No mark selected");
             selectionAlert.setContentText("Please select a mark from the table.");
             selectionAlert.showAndWait();
@@ -182,29 +182,55 @@ public class manage_mark_controller {
         stage.show();
     }
     @FXML
-    void deleteMark(ActionEvent event) throws IOException {
+    void deleteMark(ActionEvent event) {
+        StudentInfo selectedStudentInfo = tableView.getSelectionModel().getSelectedItem();
+        if (selectedStudentInfo != null) {
+            // Show a confirmation dialog before deleting the mark
+            Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmationAlert.setTitle("Delete StudentInfo");
+            confirmationAlert.setHeaderText("Confirm Deletion");
+            confirmationAlert.setContentText("Are you sure you want to delete the mark for " + selectedStudentInfo.getFirst_name() + " " + selectedStudentInfo.getLast_name() + "?");
 
-//        VBox vBox = new VBox();
-//        Button ok = new Button("OK");
-//        TextField txtMarkID = new TextField();
-//        HBox hBox = new HBox();
-//        hBox.getChildren().addAll(new Label("MarkID: "), txtMarkID);
-//        vBox.getChildren().addAll(new Label("Please enter markID to delete the mark"),hBox,ok);
-//        Scene scene = new Scene(vBox);
-//
-//        Stage stage = new Stage();
-//        stage.setTitle("Delete Mark");
-//        stage.setScene(scene);
-//        stage.show();
-//        ok.setOnAction(e ->{
-//
-//        });
-        loader = new FXMLLoader(getClass().getResource("delete.fxml"));
-        root= loader.load();
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+            Optional<ButtonType> result = confirmationAlert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                // Perform the mark deletion from the TableView and database
+                try {
+                    connection = Database.connectDb();
+
+                    String query = "DELETE FROM mark WHERE mark_id = ?";
+                    preparedStatement = connection.prepareStatement(query);
+                    preparedStatement.setInt(1, selectedStudentInfo.getMark_id());
+                    preparedStatement.executeUpdate();
+
+                    connection.close();
+
+                    // Show a success message
+                    Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+                    successAlert.setTitle("StudentInfo Deleted");
+                    successAlert.setHeaderText("StudentInfo successfully deleted");
+                    successAlert.setContentText("The mark for " + selectedStudentInfo.getFirst_name() + " " + selectedStudentInfo.getLast_name() + " has been deleted.");
+                    successAlert.showAndWait();
+
+                    // Remove the deleted mark from the TableView
+                    studentInfoList.remove(selectedStudentInfo);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    // Show an error message
+                    Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                    errorAlert.setTitle("Database Error");
+                    errorAlert.setHeaderText("Failed to delete mark");
+                    errorAlert.setContentText("An error occurred while deleting the mark from the database. Please try again.");
+                    errorAlert.showAndWait();
+                }
+            }
+        } else {
+            // No mark selected, show an error message
+            Alert selectionAlert = new Alert(Alert.AlertType.WARNING);
+            selectionAlert.setTitle("No StudentInfo Selected");
+            selectionAlert.setHeaderText("No mark selected");
+            selectionAlert.setContentText("Please select a mark from the table.");
+            selectionAlert.showAndWait();
+        }
     }
 
     public void initialize() {
@@ -219,7 +245,7 @@ public class manage_mark_controller {
         colMarkID.setCellValueFactory(new PropertyValueFactory<>("mark_id"));
         colMark.setCellValueFactory(new PropertyValueFactory<>("mark"));
 
-        tableView.setItems(markList);
+        tableView.setItems(studentInfoList);
 
     }
     public void getView(){
@@ -227,15 +253,23 @@ public class manage_mark_controller {
             connection=Database.connectDb();
 
             statement = connection.createStatement();
-            String query = "SELECT s.student_id, s.first_name, s.last_name, c.course_id, c.course_name, m.mark_id, m.mark_obtained " +
-                    "FROM student s " +
-                    "JOIN enrollment e ON s.student_id = e.student_id " +
-                    "JOIN course c ON e.course_id = c.course_id " +
-                    "JOIN mark m ON e.student_id = m.student_id AND e.course_id = m.course_id";
+//            String view = "CREATE VIEW student_view AS SELECT s.student_id, s.first_name, s.last_name, c.course_id, c.course_name, mark_id, m.mark_obtained" +
+//            "FROM student s" +
+//            "JOIN enrollment e ON s.student_id = e.student_id"+
+//            "JOIN course c ON e.course_id = c.course_id"+
+//            "JOIN mark m ON e.enrollment_id = m.enrollment_id";
+
+            String query = "select * from student_view";
+
+//            String query = "SELECT s.student_id, s.first_name, s.last_name, c.course_id, c.course_name, m.mark_id, m.mark_obtained " +
+//                    "FROM student s " +
+//                    "JOIN enrollment e ON s.student_id = e.student_id " +
+//                    "JOIN course c ON e.course_id = c.course_id " +
+//                    "JOIN mark m ON e.student_id = m.student_id AND e.course_id = m.course_id";
 
             result=statement.executeQuery(query);
             while (result.next()){
-                markList.add(new Mark(
+                studentInfoList.add(new StudentInfo(
                         result.getString(1),
                         result.getString(2),
                         result.getString(3),

@@ -1,5 +1,7 @@
 package com.example.studentinformationsystem;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,7 +9,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,12 +21,38 @@ import java.sql.*;
 public class EnterMarkController {
     Connection connection = null;
     PreparedStatement preparedStatement = null;
-    @FXML
-    private TextField txtCourseID;
+    Statement statement;
+    ResultSet result;
     FXMLLoader loader;
     Parent root;
     Stage stage;
     Scene scene;
+    @FXML
+    private TableColumn<StudentInfo, Integer> colCourseID;
+
+    @FXML
+    private TableColumn<StudentInfo, String> colCourseName;
+
+    @FXML
+    private TableColumn<StudentInfo, String> colFirstName;
+
+    @FXML
+    private TableColumn<StudentInfo, String> colLastName;
+    @FXML
+    private TableColumn<StudentInfo, String> colMarkID;
+    @FXML
+    private TableColumn<StudentInfo, Double> colMark;
+
+    @FXML
+    private TableColumn<StudentInfo, String> colStudentID;
+
+    @FXML
+    private TableView<StudentInfo> tableView;
+    ObservableList<StudentInfo> studentInfoList = FXCollections.observableArrayList();
+
+    @FXML
+    private TextField txtCourseID;
+
     @FXML
     private TextField txtMark;
 
@@ -37,7 +68,7 @@ public class EnterMarkController {
         stage.show();
     }
     @FXML
-    void handleOk(ActionEvent event) throws SQLException, SQLIntegrityConstraintViolationException{
+    void handleOk(ActionEvent event) throws SQLException, SQLIntegrityConstraintViolationException {
 //        connection = Database.connectDb();
 //        String query = "insert into mark values(?, ?, ?)";
 //        String student_id = txtStudentID.getText();
@@ -72,82 +103,79 @@ public class EnterMarkController {
         double mark = 0;
 
 //        try {
-            if (!isValidDataType(student_id, "varchar")) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("Invalid data type entered for studentID(Varchar).");
-                alert.showAndWait();
-            }else {
-                studentID = student_id;
-            }
-            if (!isValidDataType(course_id, "int") ) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("Invalid data type entered for courseID(int).");
-                alert.showAndWait();
-            }else {
-                courseID = Integer.parseInt(course_id);
-            }
-            if (!isValidDataType(markk, "double")) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("Invalid data type entered for mark(double).");
-                alert.showAndWait();
-            }else {
-                mark = Double.parseDouble(markk);
-            }
+        if (!isValidDataType(student_id, "varchar")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Invalid data type entered for studentID(Varchar).");
+            alert.showAndWait();
+        } else {
+            studentID = student_id;
+        }
+        if (!isValidDataType(course_id, "int")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Invalid data type entered for courseID(int).");
+            alert.showAndWait();
+        } else {
+            courseID = Integer.parseInt(course_id);
+        }
+        if (!isValidDataType(markk, "double")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Invalid data type entered for mark(double).");
+            alert.showAndWait();
+        } else {
+            mark = Double.parseDouble(markk);
+        }
 
-            if (!isStudentExists(connection, studentID) ) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("studentID you entered does not exist in the database!");
-                alert.showAndWait();
-            }
-            if  (!isCourseExists(connection, courseID)) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("courseID you entered does not exist in the database!");
-                alert.showAndWait();
-            }
+        if (!isStudentExists(connection, studentID)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("studentID you entered does not exist in the database!");
+            alert.showAndWait();
+        }
+        if (!isCourseExists(connection, courseID)) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("courseID you entered does not exist in the database!");
+            alert.showAndWait();
+        }
 
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from mark where course_id = "+ courseID +" and student_id = '"+studentID+"'");
-            if (resultSet.next()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("select * from mark where course_id = " + courseID + " and student_id = '" + studentID + "'");
+        if (resultSet.next()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("StudentInfo is entered already!");
+            alert.showAndWait();
+        } else {
+            // Create a PreparedStatement object
+            preparedStatement = connection.prepareStatement(query);
+
+            // Set the values for the placeholders
+            preparedStatement.setString(1, studentID);
+            preparedStatement.setInt(2, courseID);
+            preparedStatement.setDouble(3, mark);
+
+            // Execute the query
+            int insertedRow = preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
+
+            Alert alert;
+            if (insertedRow > 0) {
+                alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText(null);
-                alert.setContentText("Mark is entered already!");
-                alert.showAndWait();
+                alert.setContentText("mark inserted successfully!");
             } else {
-                   // Create a PreparedStatement object
-                    preparedStatement = connection.prepareStatement(query);
-
-                    // Set the values for the placeholders
-                    preparedStatement.setString(1, studentID);
-                    preparedStatement.setInt(2, courseID);
-                    preparedStatement.setDouble(3, mark);
-
-                    // Execute the query
-                    int insertedRow = preparedStatement.executeUpdate();
-                    preparedStatement.close();
-                    connection.close();
-
-                Alert alert;
-                if (insertedRow > 0) {
-                    alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setHeaderText(null);
-                        alert.setContentText("mark inserted successfully!");
-                } else {
-                    alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setHeaderText(null);
-                        alert.setContentText("Failed to insert mark!.");
-                }
-                alert.showAndWait();
-
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setContentText("Failed to insert mark!.");
             }
-//            } catch(SQLException, SQLIntegrityConstraintViolationException e;){
-//                e.printStackTrace();
-//                e.printStackTrace();
-//            }
+            alert.showAndWait();
+
+        }
+
     }
 
 
@@ -197,6 +225,56 @@ public class EnterMarkController {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public void initialize() {
+        getView();
+    }
+    public void loadTableView(){
+        colStudentID.setCellValueFactory(new PropertyValueFactory<>("student_id"));
+        colFirstName.setCellValueFactory(new PropertyValueFactory<>("first_name"));
+        colLastName.setCellValueFactory(new PropertyValueFactory<>("last_name"));
+        colCourseID.setCellValueFactory(new PropertyValueFactory<>("course_id"));
+        colCourseName.setCellValueFactory(new PropertyValueFactory<>("course_name"));
+        colMarkID.setCellValueFactory(new PropertyValueFactory<>("mark_id"));
+        colMark.setCellValueFactory(new PropertyValueFactory<>("mark"));
+
+        tableView.setItems(studentInfoList);
+
+    }
+    public void getView(){
+        try{
+
+            connection=Database.connectDb();
+
+            statement = connection.createStatement();
+
+            String query = "select * from student_view";
+
+            result=statement.executeQuery(query);
+            while (result.next()){
+                studentInfoList.add(new StudentInfo(
+                        result.getString(1),
+                        result.getString(2),
+                        result.getString(3),
+                        result.getInt(4),
+                        result.getString(5),
+                        result.getInt(6),
+                        result.getDouble(7)));
+            }
+            loadTableView();
+            connection.close();
+
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void refresh() {
+        studentInfoList.clear();
+        getView();
+
     }
 }
 

@@ -50,12 +50,12 @@ public class DeleteMarkController {
             Alert alert;
             if (rowsDeleted > 0) {
                 alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Delete Mark");
+                alert.setTitle("Delete StudentInfo");
                 alert.setHeaderText(null);
-                alert.setContentText("Mark deleted successfully.");
+                alert.setContentText("StudentInfo deleted successfully.");
             } else {
                 alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Delete Mark");
+                alert.setTitle("Delete StudentInfo");
                 alert.setHeaderText(null);
                 alert.setContentText("Failed to delete mark.");
             }

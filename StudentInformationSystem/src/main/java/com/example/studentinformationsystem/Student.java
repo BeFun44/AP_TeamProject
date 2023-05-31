@@ -12,6 +12,20 @@ public class Student {
     private String Gender;
     private Date Date_of_Enrolled;
 
+    public Student(String student_ID, String firstName, String lastName, String email, String address, Date date_of_birth, String gender, Date date_of_Enrolled) {
+        Student_ID = student_ID;
+        FirstName = firstName;
+        LastName = lastName;
+        Email = email;
+        Address = address;
+        Date_of_birth = date_of_birth;
+        Gender = gender;
+        Date_of_Enrolled = date_of_Enrolled;
+    }
+
+    public Student(String student_id, String first_name, String last_name, int course_id, String course_name, int mark_id, double mark_obtained) {
+    }
+
     public String getStudent_ID() {
         return Student_ID;
     }
@@ -76,14 +90,5 @@ public class Student {
         Date_of_Enrolled = date_of_Enrolled;
     }
 
-    public Student(String student_ID, String firstName, String lastName, String email, String address, Date date_of_birth, String gender, Date date_of_Enrolled) {
-        Student_ID = student_ID;
-        FirstName = firstName;
-        LastName = lastName;
-        Email = email;
-        Address = address;
-        Date_of_birth = date_of_birth;
-        Gender = gender;
-        Date_of_Enrolled = date_of_Enrolled;
-    }
+
 }

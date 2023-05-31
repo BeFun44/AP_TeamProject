@@ -1,6 +1,6 @@
 package com.example.studentinformationsystem;
 
-public class Mark {
+public class StudentInfo {
    private String student_id;
     private String first_name;
     private String last_name;
@@ -9,7 +9,7 @@ public class Mark {
     private int mark_id;
     private double mark;
 
-    public Mark(String student_id, String first_name, String last_name, int course_id, String course_name,int mark_id, double mark) {
+    public StudentInfo(String student_id, String first_name, String last_name, int course_id, String course_name, int mark_id, double mark) {
         this.student_id = student_id;
         this.first_name = first_name;
         this.last_name = last_name;
